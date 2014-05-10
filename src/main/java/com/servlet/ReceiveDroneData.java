@@ -29,6 +29,7 @@ import com.utility.DroneData;
     )
 public class ReceiveDroneData extends HttpServlet {
     private static final Object ONE = "1";
+	private static final Object ZERO = "0";
 	protected final Log logger = LogFactory.getLog(getClass());
  
     @Override
@@ -86,7 +87,7 @@ public class ReceiveDroneData extends HttpServlet {
     
     private Boolean getAliveData(String objectIsAlive) {
 		boolean isAlive = false;
-		if(objectIsAlive != null && objectIsAlive.equals(ONE)) {
+		if(objectIsAlive != null && !objectIsAlive.equals(ZERO)) {
 			isAlive = true;
 		}
 		return isAlive;
