@@ -51,16 +51,18 @@ public class ReceiveDroneData extends HttpServlet {
     	
     	
     	Map<String, Boolean> objects = new HashMap<String, Boolean>();
-    	objects.put(objectId, getAliveData(objectIsAlive));
+    	if(objectId != null && !objectId.isEmpty()) {
+    	    objects.put(objectId, getAliveData(objectIsAlive));
+    	}
 		
-    	drone.setObjects(objects );
+    	drone.setObjects(objects);
     	
     	DroneData droneHashMapData =  DataStorage.getDromeList(droneId);
     	
     	if(droneHashMapData != null) {
     		droneHashMapData.setAlive(getAliveData(isAlive));
-    		droneHashMapData.setLatitude(Float.parseFloat(latitude));
-    		droneHashMapData.setLongitude(Float.parseFloat(longtitude));
+    		droneHashMapData.setLatitude(Float.parseFloat("12.9734"));
+    		droneHashMapData.setLongitude(Float.parseFloat("77.6442"));
     		
     		if(getAliveData(isAlive)) {
     			// Update the objects hash map.
