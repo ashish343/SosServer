@@ -1,7 +1,6 @@
 package com.servlet;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,17 +30,6 @@ public class DefaultController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	
-    	DroneData drone = new DroneData();
-    	drone.setAlive(true);
-    	drone.setLongitude(77.6442);
-    	drone.setLatitude(12.9734);
-    	Map<String, Boolean> objects = new HashMap<String, Boolean>();
-    	objects.put("1", true);
-		drone.setObjects(objects );
-		
-		DataStorage.droneList.put("Drone1", drone);
-
 		Map<String, DroneData> droneList = DataStorage.getDroneList();
         Gson gson = new Gson();
         ServletOutputStream out = response.getOutputStream();
