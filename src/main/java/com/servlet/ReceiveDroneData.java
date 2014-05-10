@@ -46,8 +46,8 @@ public class ReceiveDroneData extends HttpServlet {
     	
     	DroneData drone = new DroneData();
     	drone.setAlive(getAliveData(isAlive));
-    	drone.setLongitude(Float.parseFloat(latitude));
-    	drone.setLatitude(Float.parseFloat(longtitude));
+    	drone.setLongitude(Float.parseFloat(longtitude));
+    	drone.setLatitude(Float.parseFloat(latitude));
     	
     	
     	Map<String, Boolean> objects = new HashMap<String, Boolean>();
