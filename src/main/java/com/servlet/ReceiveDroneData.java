@@ -20,29 +20,42 @@ import com.google.gson.Gson;
 import com.utility.DataStorage;
 import com.utility.DroneData;
 
+/*
+ * codeforindia.herokuapp.com/data?droneId=1&isAlive=true&latitude=33&longtitude=33&objectId=2&objectIsAlive=true
+ */
 @SuppressWarnings("serial")
 @WebServlet(
-        name = "Servlet", 
-        urlPatterns = {"/home"}
+        name = "ReceiveDroneData", 
+        urlPatterns = {"/data"}
     )
-public class DefaultController extends HttpServlet {
-    protected final Log logger = LogFactory.getLog(getClass());
+public class ReceiveDroneData extends HttpServlet {
+    private static final Object ONE = "1";
+	protected final Log logger = LogFactory.getLog(getClass());
  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
+    	String droneId = request.getParameter("droneId");
+    	String isAlive = request.getParameter("isAlive");
+    	String latitude = request.getParameter("latitude");
+    	String longtitude = request.getParameter("longtitude");
+    	String objectId = request.getParameter("objectId");
+    	String objectIsAlive = request.getParameter("objectIsAlive");
+    	
     	Map<String, DroneData> droneData = new HashMap<String, DroneData>();
     	
     	DroneData drone = new DroneData();
-    	drone.setAlive(true);
-    	drone.setLongitude(3221);
-    	drone.setLatitude(76576);
+    	drone.setAlive(getAliveData(isAlive));
+    	drone.setLongitude(Float.parseFloat(latitude));
+    	drone.setLatitude(Float.parseFloat(longtitude));
+    	
+    	
     	Map<String, Boolean> objects = new HashMap<String, Boolean>();
-    	objects.put("1", true);
-		drone.setObjects(objects );
+    	objects.put(objectId, getAliveData(objectIsAlive));
 		
-		droneData.put("Drone1", drone);
+    	drone.setObjects(objects );
+		droneData.put(droneId, drone);
 		
 		DataStorage.setDroneList(droneData );
         Map<String, DroneData> droneList = DataStorage.getDroneList();
@@ -52,7 +65,15 @@ public class DefaultController extends HttpServlet {
         out.flush();
     }
     
-    @Override
+    private Boolean getAliveData(String objectIsAlive) {
+		boolean isAlive = false;
+		if(objectIsAlive != null && objectIsAlive.equals(ONE)) {
+			isAlive = true;
+		}
+		return isAlive;
+	}
+
+	@Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
     	doGet(req, resp);
