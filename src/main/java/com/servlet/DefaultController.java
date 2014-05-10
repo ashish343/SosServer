@@ -48,7 +48,7 @@ public class DefaultController extends HttpServlet {
         Map<String, DroneData> droneList = DataStorage.getDroneList();
         Gson gson = new Gson();
         ServletOutputStream out = response.getOutputStream();
-        out.write(gson.toJson(droneList).getBytes());
+        out.write(("handleResp(" + gson.toJson(droneList) + ")").getBytes());
         out.flush();
     }
     
