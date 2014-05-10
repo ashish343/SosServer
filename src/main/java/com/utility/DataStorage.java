@@ -3,15 +3,18 @@ package com.utility;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class DataStorage {
+public class DataStorage {
 	public static Map<String, DroneData> droneList = new HashMap<String, DroneData>();
 
 	public static Map<String, DroneData> getDroneList() {
 		return droneList;
 	}
 
-	public static void setDroneList(Map<String, DroneData> droneList) {
-		DataStorage.droneList = droneList;
+	public static DroneData getDromeList(String key) {
+		return droneList.get(key);
+	}
+	public static void appendDroneList(Map<String, DroneData> droneList) {
+		droneList.putAll(droneList);
 	}
 	
 	public static Map<String, DroneData> getMap() {

@@ -57,7 +57,7 @@ public class ReceiveDroneData extends HttpServlet {
     	drone.setObjects(objects );
 		droneData.put(droneId, drone);
 		
-		DataStorage.setDroneList(droneData );
+		DataStorage.appendDroneList(droneData );
         Map<String, DroneData> droneList = DataStorage.getDroneList();
         Gson gson = new Gson();
         ServletOutputStream out = response.getOutputStream();

@@ -32,20 +32,17 @@ public class DefaultController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
-    	Map<String, DroneData> droneData = new HashMap<String, DroneData>();
-    	
     	DroneData drone = new DroneData();
     	drone.setAlive(true);
-    	drone.setLongitude(3221);
-    	drone.setLatitude(76576);
+    	drone.setLongitude(12.9734);
+    	drone.setLatitude(77.6442);
     	Map<String, Boolean> objects = new HashMap<String, Boolean>();
     	objects.put("1", true);
 		drone.setObjects(objects );
 		
-		droneData.put("Drone1", drone);
-		
-		DataStorage.setDroneList(droneData );
-        Map<String, DroneData> droneList = DataStorage.getDroneList();
+		DataStorage.droneList.put("Drone1", drone);
+
+		Map<String, DroneData> droneList = DataStorage.getDroneList();
         Gson gson = new Gson();
         ServletOutputStream out = response.getOutputStream();
         out.write(("handleResp(" + gson.toJson(droneList) + ")").getBytes());
