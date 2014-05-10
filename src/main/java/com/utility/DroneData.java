@@ -5,6 +5,8 @@ import java.util.Map;
 public class DroneData {
 	private double latitude;
 	private double longitude;
+	private boolean isAlive;
+	private Map<String, Boolean> objects;
 	
 	public double getLatitude() {
 		return latitude;
@@ -19,8 +21,6 @@ public class DroneData {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	private boolean isAlive;
-	private Map<String, Boolean> objects;
 	
 	public boolean isAlive() {
 		return isAlive;

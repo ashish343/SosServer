@@ -34,8 +34,8 @@ public class DefaultController extends HttpServlet {
     	
     	DroneData drone = new DroneData();
     	drone.setAlive(true);
-    	drone.setLongitude(12.9734);
-    	drone.setLatitude(77.6442);
+    	drone.setLongitude(77.6442);
+    	drone.setLatitude(12.9734);
     	Map<String, Boolean> objects = new HashMap<String, Boolean>();
     	objects.put("1", true);
 		drone.setObjects(objects );

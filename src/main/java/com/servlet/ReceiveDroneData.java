@@ -1,7 +1,6 @@
 package com.servlet;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,9 +54,27 @@ public class ReceiveDroneData extends HttpServlet {
     	objects.put(objectId, getAliveData(objectIsAlive));
 		
     	drone.setObjects(objects );
-		droneData.put(droneId, drone);
+    	
+    	DroneData droneHashMapData =  DataStorage.getDromeList(droneId);
+    	
+    	if(droneHashMapData != null) {
+    		droneHashMapData.setAlive(getAliveData(isAlive));
+    		droneHashMapData.setLatitude(Float.parseFloat(latitude));
+    		droneHashMapData.setLongitude(Float.parseFloat(longtitude));
+    		
+    		if(getAliveData(isAlive)) {
+    			// Update the objects hash map.
+    			Map<String, Boolean> oldObjects = droneHashMapData.getObjects();
+    			oldObjects.put(objectId, getAliveData(objectIsAlive));
+    		} 
+    		
+    		droneData.put(droneId, droneHashMapData);
+    		DataStorage.appendDroneList(droneData);
+    	} else {
+    		droneData.put(droneId, drone);
+    		DataStorage.appendDroneList(droneData);
+    	}
 		
-		DataStorage.appendDroneList(droneData );
         Map<String, DroneData> droneList = DataStorage.getDroneList();
         Gson gson = new Gson();
         ServletOutputStream out = response.getOutputStream();

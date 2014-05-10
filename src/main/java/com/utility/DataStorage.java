@@ -13,8 +13,8 @@ public class DataStorage {
 	public static DroneData getDromeList(String key) {
 		return droneList.get(key);
 	}
-	public static void appendDroneList(Map<String, DroneData> droneList) {
-		droneList.putAll(droneList);
+	public static void appendDroneList(Map<String, DroneData> droneListValue) {
+		droneList.putAll(droneListValue);
 	}
 	
 	public static Map<String, DroneData> getMap() {
